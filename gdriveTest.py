@@ -25,9 +25,17 @@ pp = pprint.PrettyPrinter()
 #Access all of the record inside that
 result = sheet.get_all_records()
 
-@app.route('/test')
+currentWord=""
+
+@app.route('/game')
 def index2():
-  return 'Server Works!'
+  sheet = client.open('AppDictionary').sheet1
+  result1 = sheet.get_all_records()
+  samples=random.sample(range(0, len(result1)-1), 5)
+  resp=[]
+  for i in range (0,5):
+  	resp.append(result1[i])
+
 
 @app.route('/alldata')
 def index1():
