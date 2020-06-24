@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<body>
+
+<h1>WordPlay</h1>
+
+<p id="word" style="display:none;">Word</p>
+<p id="meaning" style="display:none;">Meaning</p>
+
+<button id="b1" onclick="getRandom()">Start</button>
+<button id="b2" onclick="toggleMeaning()" style="display:none;">Show Meaning</button>
+
+<script type="text/javascript">
+var mean=false
+
+function getRandom() {
+document.getElementById("word").innerHTML = 'loading...';
+document.getElementById("meaning").style.display = 'none'
+document.getElementById("b2").innerHTML = 'Show Meaning';
+fetch("http://40.121.23.178:5000/randomWord", {
+"headers": {
+"Accept": "*/*",
+"Accept-Encoding": "gzip, deflate, br",
+"cache-control": "no-cache",
+"pragma": "no-cache",
+"Connection": "keep-alive",
+},
+"referrerPolicy": "no-referrer-when-downgrade",
+"method": "GET"
+}).then(response => {
+//console.log('log1',response);
+  return response.json();
+}).then((data) => {
+  // console.log('log2',data);
+  // console.log('log3',data['data']['Word']);
+  document.getElementById("word").style.display = 'block'
+  document.getElementById("b2").style.display = 'flex'
+  document.getElementById("word").innerHTML = data['data']['Word'];
+  document.getElementById("meaning").innerHTML = data['data']['Meaning'];
+  document.getElementById("b1").innerHTML = 'Next';
+  
+}).catch(err => {
+	console.log('log2',err);
+});
+}
+
+function toggleMeaning(){
+	mean=!mean
+	if(mean){
+		document.getElementById("meaning").style.display = 'block'
+	document.getElementById("b2").innerHTML = 'Hide Meaning';
+	}
+	else{
+		document.getElementById("meaning").style.display = 'none'
+	document.getElementById("b2").innerHTML = 'Show Meaning';
+	}
+	
+}
+</script>
+
+</body>
+</html>
