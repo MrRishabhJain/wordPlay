@@ -40,7 +40,7 @@ def index2():
 
 @app.route('/pull')
 def pull():
-	g = git.cmd.Git(git_dir)
+	g = git.cmd.Git(os.cwd())
 	g.pull()
 
 @app.route('/alldata')
