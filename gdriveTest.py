@@ -35,6 +35,7 @@ def index2():
   resp=[]
   for i in range (0,5):
   	resp.append(result1[i])
+  return {'data':resp}
 
 
 @app.route('/alldata')
