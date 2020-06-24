@@ -40,7 +40,7 @@ def index2():
 
 @app.route('/pull')
 def pull():
-	g = git.cmd.Git(os.pwd())
+	g = git.cmd.Git(os.getcwd())
 	g.pull()
 	return 'Server updated!'
 
