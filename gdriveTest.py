@@ -5,7 +5,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 # Print nicely
 import pprint
 import random
-
+import git
+import os
 
 from flask import Flask
 from flask_cors import CORS
@@ -37,6 +38,10 @@ def index2():
   	resp.append(result1[i])
   return {'data':resp}
 
+@app.route('/pull')
+def pull():
+	g = git.cmd.Git(git_dir)
+	g.pull()
 
 @app.route('/alldata')
 def index1():
